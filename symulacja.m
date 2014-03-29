@@ -244,54 +244,56 @@ end
 
 fprintf('\n\n');
 
-subplot(2,3,3);
-plot(time/60,y_real(:,1),'b');
-hold on;
-plot(time/60,y_linearized_trajectory(:,1),'r');
-xlabel('czas (min)');
-ylabel('wysokosc wody (cm)');
-grid on;
-legend('rzeczywisty model','model zlinearyzowany','Location','East');
-title('y_1(t)');
-
-subplot(2,3,6);
-plot(time/60,y_real(:,2),'b');
-hold on;
-plot(time/60,y_linearized_trajectory(:,2),'r');
-grid on;
-xlabel('czas (min)');
-ylabel('temperatura wody (^oC)');
-legend('rzeczywisty model','model zlinearyzowany','Location','East');
-title('y_2(t)');
-
-subplot(2,3,1);
-stairs(time/60,u_real_trajectory(:,1),'m');
-hold on;
-xlabel('czas (min)');
-ylabel('strumien goracej wody (cm^3/s)');
-grid on;
-title('u_1(t)');
-
-subplot(2,3,4);
-stairs(time/60,u_real_trajectory(:,2),'m');
-hold on;
-xlabel('czas (min)');
-ylabel('strumien zimnej wody (cm^3/s)');
-grid on;
-title('u_2(t)');
-
-subplot(2,3,2);
-stairs(time/60,z_trajectory(:,1),'m');
-hold on;
-xlabel('czas (min)');
-ylabel('strumien zaklocajacy wody (cm^3/s)');
-grid on;
-title('u_3(t)');
-
-subplot(2,3,5);
-stairs(time/60,z_trajectory(:,2),'m');
-hold on;
-xlabel('czas (min)');
-ylabel('temperatura wody zaklocajacej (^oC)');
-grid on;
-title('u_4(t)');
+if 0
+   subplot(2,3,3);
+   plot(time/60,y_real(:,1),'b');
+   hold on;
+   plot(time/60,y_linearized_trajectory(:,1),'r');
+   xlabel('czas (min)');
+   ylabel('wysokosc wody (cm)');
+   grid on;
+   legend('rzeczywisty model','model zlinearyzowany','Location','East');
+   title('y_1(t)');
+   
+   subplot(2,3,6);
+   plot(time/60,y_real(:,2),'b');
+   hold on;
+   plot(time/60,y_linearized_trajectory(:,2),'r');
+   grid on;
+   xlabel('czas (min)');
+   ylabel('temperatura wody (^oC)');
+   legend('rzeczywisty model','model zlinearyzowany','Location','East');
+   title('y_2(t)');
+   
+   subplot(2,3,1);
+   stairs(time/60,u_real_trajectory(:,1),'m');
+   hold on;
+   xlabel('czas (min)');
+   ylabel('strumien goracej wody (cm^3/s)');
+   grid on;
+   title('u_1(t)');
+   
+   subplot(2,3,4);
+   stairs(time/60,u_real_trajectory(:,2),'m');
+   hold on;
+   xlabel('czas (min)');
+   ylabel('strumien zimnej wody (cm^3/s)');
+   grid on;
+   title('u_2(t)');
+   
+   subplot(2,3,2);
+   stairs(time/60,z_trajectory(:,1),'m');
+   hold on;
+   xlabel('czas (min)');
+   ylabel('strumien zaklocajacy wody (cm^3/s)');
+   grid on;
+   title('u_3(t)');
+   
+   subplot(2,3,5);
+   stairs(time/60,z_trajectory(:,2),'m');
+   hold on;
+   xlabel('czas (min)');
+   ylabel('temperatura wody zaklocajacej (^oC)');
+   grid on;
+   title('u_4(t)');
+end
