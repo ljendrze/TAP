@@ -11,6 +11,9 @@
 global plant_C;      plant_C = 0.75;
 global plant_alpha;  plant_alpha = 15.9;
 
+global u_step;
+global z_step;
+
 % Definicja punktu pracy. 
 % Podobnie jak w przypadku definicji stałych obiektu, deklarowane są jako
 % zmienne globalne.
@@ -65,7 +68,8 @@ u_real_trajectory = ones(size(time,1),2);
 u_real_trajectory(:,1) = u_real_trajectory(:,1)*plant_u0(1);
 u_real_trajectory(:,2) = u_real_trajectory(:,2)*plant_u0(2);
 
-for i = (60/dt)+1 : size(time,1)
+for i = 1 : size(time,1)
+% for i = (60/dt)+1 : size(time,1)
    u_trajectory(i,1) = u_step(1);
    u_real_trajectory(i,1) = u_step(1);
    u_real_trajectory(i,2) = u_step(2);
@@ -81,8 +85,8 @@ end
 plant_z0 = [ plant_F_D0; plant_T_D0 ];
 
 % Wartość zmiennych zakłócających po skokach:
-%z_step = [ 7; 35.31 ];
-z_step = [ 9; 35.31 ];
+% z_step = [ 7; 35.31 ];
+z_step = [ 7; 35.31 ];
 
 % Trajektoria zmian zakłóceń obiektu. W chwili obecnej jest to wartość
 % stała w całym czasie trwania symulacji.
@@ -90,7 +94,8 @@ z_trajectory = ones(size(time,1),2);
 z_trajectory(:,1) = z_trajectory(:,1)*plant_z0(1);
 z_trajectory(:,2) = z_trajectory(:,2)*plant_z0(2);
 
-for i = (60/dt)+1 : size(time,1)
+for i = 1 : size(time,1)
+%for i = (60/dt)+1 : size(time,1)
    z_trajectory(i,1) = z_step(1);
    z_trajectory(i,2) = z_step(2);
 end
