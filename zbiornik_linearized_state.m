@@ -1,19 +1,20 @@
 function dxdt = zbiornik_linearized_state(t, x, u)
-% zbiornik( t, x, u ) - funkcja obliczajaca rownania stanu dla układu 
-% dynamicznego zbiornika z mieszaniem
+% zbiornik_linearized_state( t, x, u ) - funkcja obliczjaca zlinearyzowane
+% rownania stanu dla układu dynamicznego zbiornika z mieszaniem
 %
 %   ARGUMENTY:
 %     t - czas
 %     x - wartosc stanu
-%     u - wartosc sterowania
+%     u - wejscia ( u1, u2 - sterowania; u3, u4 - zaklocenia)
 %   WARTOSCI WYJSCIOWE:
 %     dxdt - wartosc pochodnej po czasie funckji stanu
 % 
 % Funkcja korzysta ponadto ze zmiennych globalnych:
 % 
-%     C, alpha, T_C0, T_H0, T_D0
+%     A, B
 % 
-% które muszą zostać zainicjalizowane przed wywołaniem funkcji.
+% bedacych macierzami opisujacymi zlinearyzowany model. Musza one zostac
+% zainicjalizowane przed wywolaniem funkcji.
 
 global A;
 global B;

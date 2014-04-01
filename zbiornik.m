@@ -1,19 +1,20 @@
 function dxdt = zbiornik(t, x, u, z)
-% zbiornik( t, x, u ) - funkcja obliczajaca rownania stanu dla układu 
+% zbiornik( t, x, u ) - funkcja oblicząjaca równania stanu dla układu 
 % dynamicznego zbiornika z mieszaniem
 %
 %   ARGUMENTY:
 %     t - czas
-%     x - wartosc stanu
-%     u - wartosc sterowania
-%   WARTOSCI WYJSCIOWE:
-%     dxdt - wartosc pochodnej po czasie funckji stanu
+%     x - wartość stanu
+%     u - wartość sterowania
+%   WARTOŚCI WYJŚCIOWE:
+%     dxdt - wartość pochodnej po czasie funkcji stanu
 % 
 % Funkcja korzysta ponadto ze zmiennych globalnych:
 % 
-%     C, alpha, T_C0, T_H0, T_D0
+%     plant_C, plant_alpha, plant_T_C0, plant_T_H0
 % 
-% które muszą zostać zainicjalizowane przed wywołaniem funkcji.
+% opisujących właściwości obiektu, które muszą zostać zainicjalizowane 
+% przed wywołaniem funkcji.
 
 global plant_C;
 global plant_alpha;

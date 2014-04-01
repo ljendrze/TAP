@@ -1,32 +1,16 @@
 % Skrypt słuzacy do symulacji działania obiektu jakim jest 
-% zbiornik z mieszaniem.
-
-% Przyjęte jednostki:
-% czas: sekunda
-% odległość: cm
-
+% zbiornik z mieszaniem. Ponadto w skrypcie tworzony jest także model
+% zlinearyzowane w punkcie pracy w postaci równań stanu, a następnie
+% dokonywana jest symulacja obiektu opisanego nieliniowymi równaniami
+% różniczkowymi i modelu zlinearyzowanego w celu otrzymania wykresów
+% obrazujących jakość linearyzacji dla podanych trajektorii zmian zmiennych
+% wejściowych.
+%
 % Definicja stałych. 
 % Są zadeklarowane jako zmienne globalne na rzecz wywoływania przez funkcję
 % służącą do rozwiązania równań różniczkowych opisujących obiekt.
-global plant_C;      plant_C = 0.75;
-global plant_alpha;  plant_alpha = 15.9;
 
-global u_step;
-global z_step;
-
-% Definicja punktu pracy. 
-% Podobnie jak w przypadku definicji stałych obiektu, deklarowane są jako
-% zmienne globalne.
-global plant_T_C0;   plant_T_C0 = 16.97;
-global plant_T_H0;   plant_T_H0 = 74.41;
-global plant_T_D0;   plant_T_D0 = 35.31;
-global plant_F_C0;   plant_F_C0 = 32;
-global plant_F_H0;   plant_F_H0 = 19;
-global plant_F_D0;   plant_F_D0 = 7;
-global plant_tau_C0; plant_tau_C0 = 100;
-global plant_tau0;   plant_tau0 = 55;
-global plant_h0;     plant_h0 = 13.3;
-global plant_T0;     plant_T0 = 38;
+plants_coefficients;
 
 % Definicja wektora czasu dla symulacji obiektu.
 % Parametr dt mówi o "częstości próbkowania" ciągłego obiektu.
@@ -56,7 +40,7 @@ plant_u0 = [plant_F_H0; plant_F_C0];
 
 % Wartość zmiennych po skoku:
 % u_step = [ 19; 32 ];
-u_step = [ 19; 32 ];
+u_step = [ 19; 35 ];
 
 % Trajektoria zmian wejść obiektu. W chwili obecnej jest to stała trajektoria
 % po skoku wartości zadanej po pierwszej minucie.
@@ -69,7 +53,6 @@ u_real_trajectory(:,1) = u_real_trajectory(:,1)*plant_u0(1);
 u_real_trajectory(:,2) = u_real_trajectory(:,2)*plant_u0(2);
 
 for i = 1 : size(time,1)
-% for i = (60/dt)+1 : size(time,1)
    u_trajectory(i,1) = u_step(1);
    u_real_trajectory(i,1) = u_step(1);
    u_real_trajectory(i,2) = u_step(2);
@@ -95,7 +78,6 @@ z_trajectory(:,1) = z_trajectory(:,1)*plant_z0(1);
 z_trajectory(:,2) = z_trajectory(:,2)*plant_z0(2);
 
 for i = 1 : size(time,1)
-%for i = (60/dt)+1 : size(time,1)
    z_trajectory(i,1) = z_step(1);
    z_trajectory(i,2) = z_step(2);
 end
@@ -139,14 +121,9 @@ plant_V0 = plant_x0(1);
 % na 22cm^3/s wykonujemy skok na wejściu o 3cm^3/s, stąd na odpowiadające
 % modelowi zlinearyzowanemu wejście powinniśmy podać właśnie wartość 3.
 
-% TODO:
-% Transmitancje powinny uwzględniać opóźnienia same w sobie, wydaje mi się,
-% że w ich przypadku powinno się już zrezygnować z buforów opóźniających
-% sygnały.
 global A;
 global B;
 global C;
-
 
 A = zeros(2,2);
    A(1,1) = - plant_alpha*plant_C^(-1/6)*(1/6)*plant_V0^(-5/6);
@@ -249,7 +226,7 @@ end
 
 fprintf('\n\n');
 
-if 0
+if 1
    subplot(2,3,3);
    plot(time/60,y_real(:,1),'b');
    hold on;

@@ -1,3 +1,6 @@
+% Skrypt definiujący stałe parametry opisujące sterowany obiekt, którym
+% jest zbiornik z mieszaniem.
+% 
 % Definicja stałych. 
 % Są zadeklarowane jako zmienne globalne na rzecz wywoływania przez funkcję
 % służącą do rozwiązania równań różniczkowych opisujących obiekt.
